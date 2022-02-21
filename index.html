@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MagicNotes</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/7b9c41160e.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <!--**************** header section ***************************-->
+
+    <header id="header">
+      <div class="head-wrapper">
+        <div class="left-head-container">
+          <h3 class="left-head main">Magic Notes</h3>
+          <h3 class="left-head home">Notes</h3>
+        </div>
+        <div class="right-head-container">
+          <input name="search" placeholder="Search Notes" id="search" />
+        </div>
+      </div>
+    </header>
+
+    <!-- ***************main-section****************************** -->
+
+    <div class="input-text-container">
+      <hr />
+      <h1 class="welcome-note">Welcome to Magic Notes</h1>
+      <textarea
+        name="notes"
+        class="textarea"
+        placeholder="Enter your Notes"
+      ></textarea>
+
+      <button class="add-note-button button" name="add-note">Add Note</button>
+      <hr />
+    </div>
+
+    <!-- ********saved notes section************ -->
+    <h1 class="saved-notes-heading" id="saved">Saved Notes</h1>
+    <div class="saved-notes-container">
+      <!-- <div class="cards">
+            <div class="card-text-content">
+                <h3 class="note-no">Note 1</h3>
+                <hr>
+                <p class="note-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, reprehenderit?</p>
+            </div>
+            <button class='delete-note-button button'>Delete Note</button>
+
+        </div> -->
+    </div>
+
+    <footer id="footer">
+      <p class="footer-para">
+        Handcrafted from scratch with <i class="fas fa-heart"></i> By Shubham
+      </p>
+    </footer>
+  </body>
+  <script src="scripts/app.js"></script>
+</html>
