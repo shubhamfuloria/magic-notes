@@ -35,11 +35,13 @@
     <div class="input-text-container">
       <hr />
       <h1 class="welcome-note">Welcome to Magic Notes</h1>
-      <textarea
+      <!-- <textarea
         name="notes"
         class="textarea"
-        placeholder="Enter your Notes"
-      ></textarea>
+        placeholder="Enter your text"
+      ></textarea> -->
+
+      <div name="notes" class="textarea" contenteditable="true"></div>
 
       <button class="add-note-button button" name="add-note">Add Note</button>
       <hr />
@@ -65,5 +67,7 @@
       </p>
     </footer>
   </body>
+  <script src="scripts/auto_suggestions.js"></script>
+  <script src="scripts/word_generator.js"></script>
   <script src="scripts/app.js"></script>
 </html>

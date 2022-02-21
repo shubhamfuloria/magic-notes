@@ -2,7 +2,7 @@ let addBtn = document.querySelector('.add-note-button')
 showNotes()
 
 addBtn.addEventListener('click', function () {
-  let noteTxt = document.querySelector('.textarea').value
+  let noteTxt = document.querySelector('.textarea').innerHTML;
   let noteString = localStorage.getItem('notes')
   let notesArray
 
@@ -14,9 +14,8 @@ addBtn.addEventListener('click', function () {
   if (noteTxt != '') {
     notesArray.push(noteTxt)
     localStorage.setItem('notes', JSON.stringify(notesArray))
-    document.querySelector('.textarea').value = ''
+    document.querySelector('.textarea').innerHTML = ''
     console.log(notesArray)
-
     showNotes()
   }
 })

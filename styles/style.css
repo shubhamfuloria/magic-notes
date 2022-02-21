@@ -220,3 +220,19 @@ button:hover {
     padding: 3px 5px;
   }
 }
+
+/* changes for auto suggestion feature */
+.textarea {
+  height: 500px;
+  width: 300px;
+  border: 2px grey solid;
+  margin-left: 0;
+  outline: 0;
+  resize: both;
+  overflow: auto;
+}
+
+#suggestion {
+  color: grey;
+  pointer-events: none;
+}
