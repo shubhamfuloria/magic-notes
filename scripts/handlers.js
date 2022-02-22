@@ -92,11 +92,14 @@ const searchItemClickHandler = event => {
   const content = event.target.textContent
   suggContainer.textContent = ''
   const lastSpaceIndex = inputEl.value.lastIndexOf(' ')
-  let currInput = inputEl.value;
-  if(lastSpaceIndex != -1) {
-    currInput = currInput.slice(0, lastSpaceIndex);
+  let currInput = inputEl.value
+  if (lastSpaceIndex != -1) {
+    currInput = currInput.slice(0, lastSpaceIndex)
+    inputEl.value = currInput + ' ' + content
+    return
+  } else {
+    inputEl.value = content
   }
-  inputEl.value = currInput + ' ' + content;
 }
 
 export {
