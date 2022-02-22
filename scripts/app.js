@@ -1,91 +1,76 @@
-let addBtn = document.querySelector('.add-note-button')
-showNotes()
+import {
+  handleEnterKey,
+  handleOnAddNote,
+  deleteHandler,
+  searchHandler,
+  suggInputHandler,
+} from './handlers.js'
+import {
+  addNoteBtn,
+  inputEl,
+  notesContainer,
+  searchInputEl
+} from './domElements.js'
+import { fetchData } from './data.js'
 
-addBtn.addEventListener('click', function () {
-  let noteTxt = document.querySelector('.textarea').innerHTML;
-  let noteString = localStorage.getItem('notes')
-  let notesArray
+const createCard = (content, index) => {
+  const cardEl = document.createElement('div')
+  cardEl.className = 'cards'
+  cardEl.setAttribute('data-index', index)
 
-  if (noteString == null || noteString == undefined) {
-    notesArray = []
-  } else {
-    notesArray = JSON.parse(noteString)
-  }
-  if (noteTxt != '') {
-    notesArray.push(noteTxt)
-    localStorage.setItem('notes', JSON.stringify(notesArray))
-    document.querySelector('.textarea').innerHTML = ''
-    console.log(notesArray)
-    showNotes()
-  }
-})
+  const cardTextContainer = document.createElement('div')
+  cardTextContainer.className = 'card-text-content'
 
-function showNotes () {
-  let html = ''
-  let noteString = localStorage.getItem('notes')
-  if (noteString == null || noteString == undefined) {
-    notesArray = []
-  } else {
-    notesArray = JSON.parse(localStorage.getItem('notes'))
-  }
-  notesArray.forEach(function (element, index) {
-    html += `<div class="cards">
-        <div class="card-text-content">
-            <h3 class="note-no">Note ${index + 1}</h3>
-            <hr>
-            <p class="note-para">${element}</p>
-        </div>
-        <button onclick= 'deleteNote(this.id)' class='delete-note-button button' id='${index}'>Delete Note</button>
+  const headingEl = document.createElement('h3')
+  headingEl.className = 'note-no'
+  headingEl.textContent = `Note ${index + 1}`
 
-    </div>`
-  })
+  const rowEl = document.createElement('hr')
 
-  if (localStorage.getItem('notes') == null) {
-    document.querySelector('.saved-notes-container').innerHTML =
-      '<h1 class="saved-notes-heading" style ="text-align: center;">Nothing to Show here :( </h1>'
-  } else {
-    document.querySelector('.saved-notes-container').innerHTML = html
-  }
+  const paraEl = document.createElement('p')
+  paraEl.className = 'note-para'
+  paraEl.textContent = content
+
+  cardTextContainer.append(headingEl, rowEl, paraEl)
+
+  const buttonEl = document.createElement('button')
+  buttonEl.className = 'delete-note-button button'
+  buttonEl.textContent = 'Delete Note'
+  buttonEl.onclick = deleteHandler
+
+  cardEl.append(cardTextContainer, buttonEl)
+
+  return cardEl
 }
 
-function deleteNote (index) {
-  notesArray = JSON.parse(localStorage.getItem('notes'))
+const renderNotes = _ => {
+  let notesArray = localStorage.getItem('notes')
+  if (notesArray == null) return
 
-  notesArray.splice(index, 1)
+  notesContainer.textContent = ''
+  notesArray = JSON.parse(notesArray)
 
-  localStorage.setItem('notes', JSON.stringify(notesArray))
-
-  showNotes()
+  //generate a card for each note element
+  notesArray.forEach((el, index) => {
+    const cardEl = createCard(el, index)
+    notesContainer.appendChild(cardEl)
+  })
 }
 
-let search = document.querySelector('#search')
+//listeners
+addNoteBtn.onclick = handleOnAddNote
+inputEl.onkeypress = handleEnterKey
+searchInputEl.onkeyup = searchHandler
+window.onload = renderNotes
+window.addEventListener('load', fetchData)
 
-search.addEventListener('input', function () {
-  let inputVal = search.value.toLowerCase()
-
-  console.log(inputVal)
-  let noteCards = document.getElementsByClassName('cards')
-
-  Array.from(noteCards).forEach(function (element) {
-    let cardTxt = element.getElementsByTagName('p')[0].innerText
-
-    if (cardTxt.includes(inputVal)) {
-      element.style.display = 'flex'
-    } else {
-      element.style.display = 'none'
-    }
-  })
-})
-
-let heading = document
-  .querySelector('.left-head')
-  .addEventListener('click', function () {
-    document.location.reload()
-  })
-
-let noteHead = document.querySelector('.home')
-noteHead.addEventListener('click', function () {
-  let savedNotes = document.querySelector('#saved')
-
-  savedNotes.scrollIntoView()
-})
+inputEl.oninput = event => {
+  const searchText = event.target.value
+  if (searchText.indexOf(' ') == -1) {
+    suggInputHandler(event.target.value)
+  } else {
+    const lastSpaceIndex = searchText.lastIndexOf(' ')
+    suggInputHandler(searchText.slice(lastSpaceIndex + 1))
+  }
+}
+export { renderNotes, createCard }

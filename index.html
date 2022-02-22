@@ -35,31 +35,16 @@
     <div class="input-text-container">
       <hr />
       <h1 class="welcome-note">Welcome to Magic Notes</h1>
-      <!-- <textarea
-        name="notes"
-        class="textarea"
-        placeholder="Enter your text"
-      ></textarea> -->
-
-      <div name="notes" class="textarea" contenteditable="true"></div>
-
+      <input class="textarea" type="text" />
+      <div id="sugg-container">
+      </div>
       <button class="add-note-button button" name="add-note">Add Note</button>
       <hr />
     </div>
 
     <!-- ********saved notes section************ -->
     <h1 class="saved-notes-heading" id="saved">Saved Notes</h1>
-    <div class="saved-notes-container">
-      <!-- <div class="cards">
-            <div class="card-text-content">
-                <h3 class="note-no">Note 1</h3>
-                <hr>
-                <p class="note-para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, reprehenderit?</p>
-            </div>
-            <button class='delete-note-button button'>Delete Note</button>
-
-        </div> -->
-    </div>
+    <div class="saved-notes-container"></div>
 
     <footer id="footer">
       <p class="footer-para">
@@ -67,7 +52,5 @@
       </p>
     </footer>
   </body>
-  <script src="scripts/auto_suggestions.js"></script>
-  <script src="scripts/word_generator.js"></script>
-  <script src="scripts/app.js"></script>
+  <script src="scripts/app.js" type="module"></script>
 </html>
